@@ -1,5 +1,5 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS `hotel_management1`;
+CREATE DATABASE IF NOT EXISTS `hotel_management12`;
 
 -- Use the database
 USE hotel_management;
