@@ -1,8 +1,5 @@
--- Create the database
-CREATE DATABASE IF NOT EXISTS `hotel_management`;
-
 -- Use the database
-USE hotel_management;
+USE sql9605441;
 
 -- Create the Hotel Chain table
 CREATE TABLE IF NOT EXISTS Hotel_Chain (
@@ -77,7 +74,7 @@ CREATE TABLE IF NOT EXISTS Booking (
 -- Create the Renting table
 CREATE TABLE IF NOT EXISTS Renting (
    Renting_ID INT AUTO_INCREMENT PRIMARY KEY,
-   Specific_Date DATE PRIMARY KEY,
+   Specific_Date DATE,
    Customer_ID INT,
    Room_Number INT,
    Hotel_ID INT,
