@@ -55,7 +55,7 @@ CHECK (ssn BETWEEN 0 AND 999999999);
 -- Checking for valid position
 ALTER TABLE Employee 
 ADD CONSTRAINT valid_position
-CHECK (position in ("manager", "dentist", "hygienist", "receptionist"));
+CHECK (position in ("manager", "receptionist", "House cleaner", "Cook"));
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
