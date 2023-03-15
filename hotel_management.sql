@@ -47,6 +47,16 @@ CREATE TABLE IF NOT EXISTS Employee (
    
 );
 
+-- Checking for valid ssn
+ALTER TABLE Employee 
+ADD CONSTRAINT valid_ssn
+CHECK (ssn BETWEEN 0 AND 999999999);
+
+-- Checking for valid position
+ALTER TABLE Employee 
+ADD CONSTRAINT valid_position
+CHECK (position in ("manager", "dentist", "hygienist", "receptionist"));
+
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
    Customer_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -106,6 +116,7 @@ CREATE TABLE IF NOT EXISTS Archive (
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
    Payment_ID INT AUTO_INCREMENT PRIMARY KEY,
+   paymentType VARCHAR(255),
    Customer_ID INT,
    Renting_ID INT,
    Date_Of_Payment DATE,
@@ -116,3 +127,9 @@ CREATE TABLE IF NOT EXISTS Payment (
    FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID),
    FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID)
 );
+
+-- Checking for valid payment type
+ALTER TABLE Payment 
+ADD CONSTRAINT valid_PaymentType
+CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
+
