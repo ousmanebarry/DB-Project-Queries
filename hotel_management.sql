@@ -48,6 +48,12 @@ CREATE TABLE IF NOT EXISTS Employee (
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
    
 );
+-- Create a User table
+CREATE TABLE IF NOT EXISTS User (
+   Username VARCHAR(255),
+   Password VARCHAR(255),
+   Type VARCHAR(8)
+);
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
@@ -124,6 +130,11 @@ CREATE TABLE IF NOT EXISTS Payment (
 ALTER TABLE Payment 
 ADD CONSTRAINT valid_PaymentType
 CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
+
+-- Checking for valid payment type
+ALTER TABLE User 
+ADD CONSTRAINT valid_UserType
+CHECK (Type in ("Employee", "Customer"));
 
 -- Checking for valid ssn (I think this isn't needed)
 -- ALTER TABLE Employee 
