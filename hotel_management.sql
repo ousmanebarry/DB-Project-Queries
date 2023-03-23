@@ -133,4 +133,4 @@ CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal",
 -- Checking for valid position
 ALTER TABLE Employee 
 ADD CONSTRAINT valid_position
-CHECK (position in ("manager", "receptionist", "House cleaner", "Cook"));
+CHECK (position in ("manager", "receptionist", "House cleaner", "Cook", "Room Service"));
