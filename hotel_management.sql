@@ -1,5 +1,7 @@
 -- Use the database
-USE sql9605441;
+DROP SCHEMA IF EXISTS hotel_management;
+CREATE SCHEMA hotel_management;
+USE hotel_management;
 
 -- Create the Hotel Chain table
 CREATE TABLE IF NOT EXISTS Hotel_Chain (
@@ -46,16 +48,6 @@ CREATE TABLE IF NOT EXISTS Employee (
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
    
 );
-
--- Checking for valid ssn
-ALTER TABLE Employee 
-ADD CONSTRAINT valid_ssn
-CHECK (ssn BETWEEN 0 AND 999999999);
-
--- Checking for valid position
-ALTER TABLE Employee 
-ADD CONSTRAINT valid_position
-CHECK (position in ("manager", "receptionist", "House cleaner", "Cook"));
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
@@ -133,3 +125,12 @@ ALTER TABLE Payment
 ADD CONSTRAINT valid_PaymentType
 CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
 
+-- Checking for valid ssn (I think this isn't needed)
+-- ALTER TABLE Employee 
+-- ADD CONSTRAINT valid_ssn
+-- CHECK (SSN_SIN BETWEEN 0 AND 999999999);
+
+-- Checking for valid position
+ALTER TABLE Employee 
+ADD CONSTRAINT valid_position
+CHECK (position in ("manager", "receptionist", "House cleaner", "Cook"));
