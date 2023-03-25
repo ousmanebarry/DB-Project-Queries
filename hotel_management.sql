@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS Hotel (
    Contact_Email VARCHAR(255),
    Contact_Phone VARCHAR(255),
    Rating INT,
+   Category VARCHAR(255),
    Chain_Name VARCHAR(255),
    FOREIGN KEY (Chain_Name) REFERENCES Hotel_Chain(Name)
 );
@@ -120,12 +121,17 @@ CREATE TABLE IF NOT EXISTS Payment (
 
 -- Checking for valid payment type
 ALTER TABLE Payment 
-ADD CONSTRAINT valid_PaymentType
+ADD CONSTRAINT Valid_Payment_Type
 CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
 
 -- Start autoincrementing at 100 000 000 (9 digit number)
 ALTER TABLE Employee 
 AUTO_INCREMENT = 100000000;
+
+-- Checking category of hotel
+ALTER TABLE Hotel
+ADD CONSTRAINT Valid_Hotel_Category
+CHECK (Category in ('motel', 'resort', 'luxury', 'budget'));
 
 -- Checking for valid position
 ALTER TABLE Employee 
