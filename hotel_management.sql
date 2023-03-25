@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
-   Hotel_ID INT AUTO_INCREMENT PRIMARY KEY,
+   Hotel_ID INT PRIMARY KEY,
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Room (
 
 -- Create the Employee table
 CREATE TABLE IF NOT EXISTS Employee (
-   SSN_SIN INT AUTO_INCREMENT PRIMARY KEY,
+   SIN INT AUTO_INCREMENT PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Position VARCHAR(255),
@@ -50,16 +50,15 @@ CREATE TABLE IF NOT EXISTS Employee (
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
-   Customer_ID INT AUTO_INCREMENT PRIMARY KEY,
+   Customer_ID INT PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   SSN_SIN INT,
    Registration_Date DATE
 );
 
 -- Create the Booking table
 CREATE TABLE IF NOT EXISTS Booking (
-   Booking_ID INT AUTO_INCREMENT PRIMARY KEY,
+   Booking_ID INT PRIMARY KEY,
    Specific_Date DATE,
    Customer_ID INT,
    Room_Number INT,
@@ -124,10 +123,9 @@ ALTER TABLE Payment
 ADD CONSTRAINT valid_PaymentType
 CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
 
--- Checking for valid ssn (I think this isn't needed)
--- ALTER TABLE Employee 
--- ADD CONSTRAINT valid_ssn
--- CHECK (SSN_SIN BETWEEN 0 AND 999999999);
+-- Start autoincrementing at 100 000 000 (9 digit number)
+ALTER TABLE Employee 
+AUTO_INCREMENT = 100000000;
 
 -- Checking for valid position
 ALTER TABLE Employee 
