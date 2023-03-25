@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
-   Hotel_ID INT PRIMARY KEY,
+   Hotel_ID BINARY(16) PRIMARY KEY,
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Room (
    View VARCHAR(255),
    Extendable BOOLEAN,
    Damage VARCHAR(255),
-   Hotel_ID INT,
+   Hotel_ID BINARY(16),
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
@@ -43,14 +43,14 @@ CREATE TABLE IF NOT EXISTS Employee (
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Position VARCHAR(255),
-   Work_At INT,
+   Work_At BINARY(16),
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
    
 );
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
-   Customer_ID INT PRIMARY KEY,
+   Customer_ID BINARY(16) PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Registration_Date DATE
@@ -58,11 +58,11 @@ CREATE TABLE IF NOT EXISTS Customer (
 
 -- Create the Booking table
 CREATE TABLE IF NOT EXISTS Booking (
-   Booking_ID INT PRIMARY KEY,
+   Booking_ID BINARY(16) PRIMARY KEY,
    Specific_Date DATE,
-   Customer_ID INT,
+   Customer_ID BINARY(16),
    Room_Number INT,
-   Hotel_ID INT,
+   Hotel_ID BINARY(16),
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
@@ -73,11 +73,11 @@ CREATE TABLE IF NOT EXISTS Booking (
 
 -- Create the Renting table
 CREATE TABLE IF NOT EXISTS Renting (
-   Renting_ID INT AUTO_INCREMENT PRIMARY KEY,
+   Renting_ID BINARY(16) PRIMARY KEY,
    Specific_Date DATE,
-   Customer_ID INT,
+   Customer_ID BINARY(16),
    Room_Number INT,
-   Hotel_ID INT,
+   Hotel_ID BINARY(16),
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
@@ -88,11 +88,11 @@ CREATE TABLE IF NOT EXISTS Renting (
 
 -- Create the Archive table
 CREATE TABLE IF NOT EXISTS Archive (
-   Archive_ID INT AUTO_INCREMENT PRIMARY KEY,
-   Hotel_ID INT,
-   Renting_ID INT,
-   Booking_ID INT,
-   Customer_ID INT,
+   Archive_ID BINARY(16) PRIMARY KEY,
+   Hotel_ID BINARY(16),
+   Renting_ID BINARY(16),
+   Booking_ID BINARY(16),
+   Customer_ID BINARY(16),
    Date_Of_Payment DATE,
    Room_Number INT,
    Length_Of_Stay INT,
@@ -105,12 +105,12 @@ CREATE TABLE IF NOT EXISTS Archive (
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
-   Payment_ID INT AUTO_INCREMENT PRIMARY KEY,
-   paymentType VARCHAR(255),
-   Customer_ID INT,
-   Renting_ID INT,
+   Payment_ID BINARY(16) PRIMARY KEY,
+   Payment_Type VARCHAR(255),
+   Customer_ID BINARY(16),
+   Renting_ID BINARY(16),
    Date_Of_Payment DATE,
-   Booking_ID INT,
+   Booking_ID BINARY(16),
    Payment_Status VARCHAR(255),
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS Payment (
 -- Checking for valid payment type
 ALTER TABLE Payment 
 ADD CONSTRAINT valid_PaymentType
-CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
+CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
 
 -- Start autoincrementing at 100 000 000 (9 digit number)
 ALTER TABLE Employee 
@@ -130,7 +130,7 @@ AUTO_INCREMENT = 100000000;
 -- Checking for valid position
 ALTER TABLE Employee 
 ADD CONSTRAINT valid_position
-CHECK (position in ("manager", "receptionist", "House cleaner", "Cook", "Room Service"));
+CHECK (position in ("manager", "receptionist", "house cleaner", "cook", "room service"));
 
 -- Checking for valid rating
 ALTER TABLE Hotel 
