@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS Employee (
    Address VARCHAR(255),
    Position VARCHAR(255),
    Work_At BINARY(16),
+   Username VARCHAR(255),
+   Password VARCHAR(255),
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
    
 );
@@ -54,7 +56,9 @@ CREATE TABLE IF NOT EXISTS Customer (
    Customer_ID BINARY(16) PRIMARY KEY UNIQUE,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   Registration_Date DATE
+   Registration_Date DATE,
+   Username VARCHAR(255),
+   Password VARCHAR(255)
 );
 
 -- Create the Booking table
