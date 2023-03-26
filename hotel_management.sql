@@ -5,7 +5,7 @@ USE hotel_management;
 
 -- Create the Hotel Chain table
 CREATE TABLE IF NOT EXISTS Hotel_Chain (
-   Name VARCHAR(255) PRIMARY KEY,
+   Name VARCHAR(255) PRIMARY KEY UNIQUE,
    Address VARCHAR(255),
    Number_Of_Hotels INT,
    Contact_Email VARCHAR(255),
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
-   Hotel_ID BINARY(16) PRIMARY KEY,
+   Hotel_ID BINARY(16) PRIMARY KEY UNIQUE,
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Employee (
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
-   Customer_ID BINARY(16) PRIMARY KEY,
+   Customer_ID BINARY(16) PRIMARY KEY UNIQUE,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Registration_Date DATE
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 
 -- Create the Booking table
 CREATE TABLE IF NOT EXISTS Booking (
-   Booking_ID BINARY(16) PRIMARY KEY,
+   Booking_ID BINARY(16) PRIMARY KEY UNIQUE,
    Specific_Date DATE,
    Customer_ID BINARY(16),
    Room_Number INT,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS Booking (
 
 -- Create the Renting table
 CREATE TABLE IF NOT EXISTS Renting (
-   Renting_ID BINARY(16) PRIMARY KEY,
+   Renting_ID BINARY(16) PRIMARY KEY UNIQUE,
    Specific_Date DATE,
    Customer_ID BINARY(16),
    Room_Number INT,
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS Renting (
 
 -- Create the Archive table
 CREATE TABLE IF NOT EXISTS Archive (
-   Archive_ID BINARY(16) PRIMARY KEY,
+   Archive_ID BINARY(16) PRIMARY KEY UNIQUE,
    Hotel_ID BINARY(16),
    Renting_ID BINARY(16),
    Booking_ID BINARY(16),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS Archive (
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
-   Payment_ID BINARY(16) PRIMARY KEY,
+   Payment_ID BINARY(16) PRIMARY KEY UNIQUE,
    Payment_Type VARCHAR(255),
    Customer_ID BINARY(16),
    Renting_ID BINARY(16),
