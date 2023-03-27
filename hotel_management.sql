@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS Employee (
    Position VARCHAR(255),
    Work_At INT,
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
-   
 );
 
 -- Create the Customer table
