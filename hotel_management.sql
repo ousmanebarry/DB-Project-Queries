@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
-   Hotel_ID BINARY(16) PRIMARY KEY UNIQUE,
+   Hotel_ID INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
@@ -27,24 +27,24 @@ CREATE TABLE IF NOT EXISTS Hotel (
 
 -- Create the Room table
 CREATE TABLE IF NOT EXISTS Room (
-   Room_Number INT AUTO_INCREMENT PRIMARY KEY,
+   Room_Number INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Price DECIMAL(10,2),
    Amenities VARCHAR(255),
    Capacity INT,
    View VARCHAR(255),
    Extendable BOOLEAN,
    Damage VARCHAR(255),
-   Hotel_ID BINARY(16),
+   Hotel_ID INT,
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
 -- Create the Employee table
 CREATE TABLE IF NOT EXISTS Employee (
-   SIN INT AUTO_INCREMENT PRIMARY KEY,
+   SIN INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Position VARCHAR(255),
-   Work_At BINARY(16),
+   Work_At INT,
    Username VARCHAR(255),
    Password VARCHAR(255),
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS Employee (
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
-   Customer_ID BINARY(16) PRIMARY KEY UNIQUE,
+   Customer_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Registration_Date DATE,
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS Customer (
 
 -- Create the Booking table
 CREATE TABLE IF NOT EXISTS Booking (
-   Booking_ID BINARY(16) PRIMARY KEY UNIQUE,
+   Booking_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Specific_Date DATE,
-   Customer_ID BINARY(16),
+   Customer_ID INT,
    Room_Number INT,
-   Hotel_ID BINARY(16),
+   Hotel_ID INT,
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
@@ -77,11 +77,11 @@ CREATE TABLE IF NOT EXISTS Booking (
 
 -- Create the Renting table
 CREATE TABLE IF NOT EXISTS Renting (
-   Renting_ID BINARY(16) PRIMARY KEY UNIQUE,
+   Renting_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Specific_Date DATE,
-   Customer_ID BINARY(16),
+   Customer_ID INT,
    Room_Number INT,
-   Hotel_ID BINARY(16),
+   Hotel_ID INT,
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
@@ -92,11 +92,11 @@ CREATE TABLE IF NOT EXISTS Renting (
 
 -- Create the Archive table
 CREATE TABLE IF NOT EXISTS Archive (
-   Archive_ID BINARY(16) PRIMARY KEY UNIQUE,
-   Hotel_ID BINARY(16),
-   Renting_ID BINARY(16),
-   Booking_ID BINARY(16),
-   Customer_ID BINARY(16),
+   Archive_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
+   Hotel_ID INT,
+   Renting_ID INT,
+   Booking_ID INT,
+   Customer_ID INT,
    Date_Of_Payment DATE,
    Room_Number INT,
    Length_Of_Stay INT,
@@ -109,12 +109,12 @@ CREATE TABLE IF NOT EXISTS Archive (
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
-   Payment_ID BINARY(16) PRIMARY KEY UNIQUE,
+   Payment_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Payment_Type VARCHAR(255),
-   Customer_ID BINARY(16),
-   Renting_ID BINARY(16),
+   Customer_ID INT,
+   Renting_ID INT,
    Date_Of_Payment DATE,
-   Booking_ID BINARY(16),
+   Booking_ID INT,
    Payment_Status VARCHAR(255),
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
