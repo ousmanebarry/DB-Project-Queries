@@ -14,12 +14,8 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
-<<<<<<< HEAD
-   Hotel_ID INT AUTO_INCREMENT PRIMARY KEY,
+   Hotel_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Name VARCHAR(255),
-=======
-   Hotel_ID INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
@@ -45,30 +41,19 @@ CREATE TABLE IF NOT EXISTS Room (
 
 -- Create the Employee table
 CREATE TABLE IF NOT EXISTS Employee (
-<<<<<<< HEAD
-   SSN_SIN INT AUTO_INCREMENT PRIMARY KEY,
-=======
    SIN INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    Position VARCHAR(255),
    Work_At INT,
-<<<<<<< HEAD
-=======
    Username VARCHAR(255),
    Password VARCHAR(255),
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
 );
 
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
-<<<<<<< HEAD
-   Customer_ID INT AUTO_INCREMENT PRIMARY KEY,
-=======
    Customer_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Full_name VARCHAR(255),
    Address VARCHAR(255),
    SSN_SIN INT,
@@ -77,11 +62,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 
 -- Create the Booking table
 CREATE TABLE IF NOT EXISTS Booking (
-<<<<<<< HEAD
-   Booking_ID INT AUTO_INCREMENT PRIMARY KEY,
-=======
    Booking_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Specific_Date DATE,
    Customer_ID INT,
    Room_Number INT,
@@ -96,11 +77,7 @@ CREATE TABLE IF NOT EXISTS Booking (
 
 -- Create the Renting table
 CREATE TABLE IF NOT EXISTS Renting (
-<<<<<<< HEAD
-   Renting_ID INT AUTO_INCREMENT PRIMARY KEY,
-=======
    Renting_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Specific_Date DATE,
    Customer_ID INT,
    Room_Number INT,
@@ -115,11 +92,7 @@ CREATE TABLE IF NOT EXISTS Renting (
 
 -- Create the Archive table
 CREATE TABLE IF NOT EXISTS Archive (
-<<<<<<< HEAD
-   Archive_ID INT AUTO_INCREMENT PRIMARY KEY,
-=======
    Archive_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Hotel_ID INT,
    Renting_ID INT,
    Booking_ID INT,
@@ -136,13 +109,8 @@ CREATE TABLE IF NOT EXISTS Archive (
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
-<<<<<<< HEAD
-   Payment_ID INT AUTO_INCREMENT PRIMARY KEY,
-   paymentType VARCHAR(255),
-=======
    Payment_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Payment_Type VARCHAR(255),
->>>>>>> 6ebae25d7e0f8eed8fb295ef167a3f72aa1dfebb
    Customer_ID INT,
    Renting_ID INT,
    Date_Of_Payment DATE,
