@@ -1,28 +1,24 @@
 USE hotel_management;
 
 DELIMITER //
-CREATE PROCEDURE Employee_Info(IN Username VARCHAR(255)) 
+CREATE PROCEDURE Employee_Login(IN Username VARCHAR(255), IN Password VARCHAR(255)) 
 BEGIN
 	SELECT 
-		SIN,
-        Full_name,
-        Address,
-        Position,
-        Work_At,
-        Username
-    FROM employee
-    WHERE employee.Username = Username
+		User.Username,
+        Employee.SIN,
+        Employee.Full_name,
+        Employee.Address,
+        Employee.Position,
+        Employee.Hotel_ID
+    FROM User
+    JOIN Employee ON User.SIN = Employee.SIN
+    WHERE User.Username = Username AND User.Password = Password
 ;END //
 
 
 CREATE PROCEDURE Customer_Info(IN Username VARCHAR(255)) 
 BEGIN
-	SELECT 
-		Customer_ID,
-        Full_name,
-        Address,
-        Registration_Date,
-        Username
+	SELECT *
     FROM customer
     WHERE customer.Username = Username
 ;END //

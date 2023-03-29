@@ -53,7 +53,7 @@ VALUES ('476 Walnut Street', '5', 'info5036@marriott.com', '613-243-3572', '5', 
 
 -- Populate room
 
-INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Available, Damage, Hotel_ID)
+INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Damage, Hotel_ID)
 WITH RECURSIVE nums(n) AS (
   SELECT 1
   UNION ALL
@@ -75,7 +75,6 @@ SELECT
         WHEN 2 THEN 'Mountain view'
     END AS View,
     IF(RAND() > 0.5, TRUE, FALSE) AS Extendable,
-    TRUE AS Available,
     IF(RAND() > 0.8, 'Some minor damage', '') AS Damage,
     Hotel_ID
 FROM Hotel
