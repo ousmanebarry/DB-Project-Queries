@@ -47,8 +47,6 @@ CREATE TABLE IF NOT EXISTS Employee (
    Address VARCHAR(255),
    Position VARCHAR(255),
    Work_At INT,
-   Username VARCHAR(255),
-   Password VARCHAR(255),
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
 );
 
