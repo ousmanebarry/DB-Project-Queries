@@ -51,6 +51,14 @@ CREATE TABLE IF NOT EXISTS Employee (
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- Create User table
+CREATE TABLE IF NOT EXISTS User (
+	Username VARCHAR(255),
+    Password VARCHAR(255),
+    SIN INT,
+    FOREIGN KEY (SIN) REFERENCES Employee(SIN)
+);
+
 -- Create the Customer table
 CREATE TABLE IF NOT EXISTS Customer (
    Customer_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
