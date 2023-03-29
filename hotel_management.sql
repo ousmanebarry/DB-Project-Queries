@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS Hotel (
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
    Contact_Phone VARCHAR(255),
+   Category VARCHAR(255),
    Rating INT,
    Chain_Name VARCHAR(255),
    FOREIGN KEY (Chain_Name) REFERENCES Hotel_Chain(Name)
