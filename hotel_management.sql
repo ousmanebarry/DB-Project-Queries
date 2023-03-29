@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS Room (
    Extendable BOOLEAN,
    Damage VARCHAR(255),
    Hotel_ID INT,
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID),
+   UNIQUE(Room_Number, Hotel_ID)
 );
 
 -- Create the Employee table
