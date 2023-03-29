@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS Booking (
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
 -- Create the Renting table
@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS Renting (
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
 -- Create the Archive table
@@ -101,16 +101,14 @@ CREATE TABLE IF NOT EXISTS Archive (
    Room_Number INT,
    Length_Of_Stay INT,
    Price DECIMAL(10,2),
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
    FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE
+   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
    Payment_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
-   Payment_Type VARCHAR(255) CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit")),
+   Payment_Type VARCHAR(255) CHECK (Payment_Type in ("cash", "visa", "mastercard")),
    Customer_ID INT,
    Renting_ID INT,
    Date_Of_Payment DATE,
