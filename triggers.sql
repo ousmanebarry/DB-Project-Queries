@@ -1,3 +1,5 @@
+USE hotel_management;
+
 -- Increment number of hotels
 DROP TRIGGER IF EXISTS increment_hotel_chain_hotel_count;
 CREATE TRIGGER  increment_hotel_chain_hotel_count

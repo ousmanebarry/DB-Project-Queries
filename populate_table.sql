@@ -53,7 +53,7 @@ VALUES ('476 Walnut Street', '5', 'info5036@marriott.com', '613-243-3572', '5', 
 
 -- Populate room
 
-INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Damage, Hotel_ID)
+INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Available, Damage, Hotel_ID)
 WITH RECURSIVE nums(n) AS (
   SELECT 1
   UNION ALL
@@ -61,16 +61,21 @@ WITH RECURSIVE nums(n) AS (
 )
 SELECT 
     ROUND(RAND() * 1000 + 50, 2) AS Price,
-    CONCAT('TV,', 'Wifi,', 'Air conditioning,', 'Private bathroom,', 
-		   IF(RAND() > 0.5, 'Fridge', 'Small fridge'),
-           IF(RAND() > 0.5, 'Breakfast included', 'No breakfast included')) AS Amenities,
+    CONCAT('TV,', 'Air Conditioning,', 'Free Breakfast,', 'Free Wi-Fi,', 'Free Parking,', 'Private Bathroom,', 
+		   IF(RAND() > 0.5, 'Swimming pool,', ''),
+           IF(RAND() > 0.5, 'Daily Housekeeping,', ''),
+           IF(RAND() > 0.5, 'Fitness Centre,', ''),
+           IF(RAND() > 0.5, 'Kitchen,', ''),
+           IF(RAND() > 0.5, 'Balcony/Terrace,', '')
+           ) AS Amenities,
     FLOOR(RAND() * 4 + 1) AS Capacity,
     CASE ROUND(RAND() * 2)
         WHEN 0 THEN 'City view'
         WHEN 1 THEN 'Ocean view'
         WHEN 2 THEN 'Mountain view'
     END AS View,
-    IF(RAND() > 0.5, 1, 0) AS Extendable,
+    IF(RAND() > 0.5, TRUE, FALSE) AS Extendable,
+    TRUE AS Available,
     IF(RAND() > 0.8, 'Some minor damage', '') AS Damage,
     Hotel_ID
 FROM Hotel

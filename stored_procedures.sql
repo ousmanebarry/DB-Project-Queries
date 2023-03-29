@@ -1,3 +1,5 @@
+USE hotel_management;
+
 DELIMITER //
 CREATE PROCEDURE Employee_Info(IN Username VARCHAR(255)) 
 BEGIN

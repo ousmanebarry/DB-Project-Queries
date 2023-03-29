@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS Room (
    Capacity INT,
    View VARCHAR(255),
    Extendable BOOLEAN,
+   Available BOOLEAN,
    Damage VARCHAR(255),
    Hotel_ID INT,
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
