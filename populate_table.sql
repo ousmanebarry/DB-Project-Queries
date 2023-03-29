@@ -52,7 +52,13 @@ VALUES ('476 Walnut Street', '5', 'info5036@marriott.com', '613-243-3572', '5', 
 ('793 Lake Park', '5', 'info3346@4seasons.com', '613-860-2980', '3', 'resort', 'Four Seasons');
 
 -- Populate room
+
 INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Damage, Hotel_ID)
+WITH RECURSIVE nums(n) AS (
+  SELECT 1
+  UNION ALL
+  SELECT n + 1 FROM nums WHERE n < 30
+)
 SELECT 
     ROUND(RAND() * 1000 + 50, 2) AS Price,
     CONCAT('TV,', 'Wifi,', 'Air conditioning,', 'Private bathroom,', 
@@ -68,5 +74,6 @@ SELECT
     IF(RAND() > 0.8, 'Some minor damage', '') AS Damage,
     Hotel_ID
 FROM Hotel
-CROSS JOIN (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) AS nums
+CROSS JOIN nums
 ORDER BY Hotel_ID;
+

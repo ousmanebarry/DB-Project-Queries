@@ -20,9 +20,9 @@ CREATE TABLE IF NOT EXISTS Hotel (
    Contact_Email VARCHAR(255),
    Contact_Phone VARCHAR(255),
    Category VARCHAR(255),
-   Rating INT,
+   Rating INT CHECK (Rating>=1 AND Rating<=5),
    Chain_Name VARCHAR(255),
-   FOREIGN KEY (Chain_Name) REFERENCES Hotel_Chain(Name)
+   FOREIGN KEY (Chain_Name) REFERENCES Hotel_Chain(Name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Room table
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Room (
    Extendable BOOLEAN,
    Damage VARCHAR(255),
    Hotel_ID INT,
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID),
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
    UNIQUE(Room_Number, Hotel_ID)
 );
 
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS Employee (
    SIN INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   Position VARCHAR(255),
+   Position VARCHAR(255) CHECK (Position in ("manager", "receptionist", "House cleaner", "Cook", "Room Service")),
    Work_At INT,
-   FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID)
+   FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Customer table
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS Booking (
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
-   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Renting table
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS Renting (
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
-   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Archive table
@@ -100,43 +100,23 @@ CREATE TABLE IF NOT EXISTS Archive (
    Room_Number INT,
    Length_Of_Stay INT,
    Price DECIMAL(10,2),
-   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID),
-   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID),
-   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID),
-   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID)
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
    Payment_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
-   Payment_Type VARCHAR(255),
+   Payment_Type VARCHAR(255) CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit")),
    Customer_ID INT,
    Renting_ID INT,
    Date_Of_Payment DATE,
    Booking_ID INT,
    Payment_Status VARCHAR(255),
    Price DECIMAL(10,2),
-   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
-   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID),
-   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID)
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
--- Checking for valid payment type
-ALTER TABLE Payment 
-ADD CONSTRAINT valid_PaymentType
-CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
-
--- Checking for valid ssn (I think this isn't needed)
--- ALTER TABLE Employee 
--- ADD CONSTRAINT valid_ssn
--- CHECK (SSN_SIN BETWEEN 0 AND 999999999);
-
--- Checking for valid position
-ALTER TABLE Employee 
-ADD CONSTRAINT valid_position
-CHECK (position in ("manager", "receptionist", "House cleaner", "Cook", "Room Service"));
-
--- Checking for valid rating
-ALTER TABLE Hotel 
-ADD CONSTRAINT valid_rating
-CHECK (Rating>=1 AND Rating<=5);
