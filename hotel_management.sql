@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Hotel (
 -- Create the Room table
 CREATE TABLE IF NOT EXISTS Room (
    Room_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
-   Room_Number INT AUTO_INCREMENT,
+   Room_Number INT,
    Price DECIMAL(10,2),
    Amenities VARCHAR(255),
    Capacity INT,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Booking (
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_Number),
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS Renting (
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID),
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_Number),
+   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
