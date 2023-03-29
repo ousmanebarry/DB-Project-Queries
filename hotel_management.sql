@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Employee (
    SIN INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   Position VARCHAR(255) CHECK (Position in ("manager", "receptionist", "House cleaner", "Cook", "Room Service")),
+   Position VARCHAR(255) CHECK (Position in ("Receptionist")),
    Work_At INT,
    FOREIGN KEY (Work_At) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
