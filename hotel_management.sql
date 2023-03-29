@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS Payment (
 -- Checking for valid payment type
 ALTER TABLE Payment 
 ADD CONSTRAINT valid_PaymentType
-CHECK (paymentType in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
+CHECK (Payment_Type in ("cash", "visa", "cheque", "mastercard", "amex", "paypal", "debit"));
 
 -- Checking for valid ssn (I think this isn't needed)
 -- ALTER TABLE Employee 
