@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS Hotel_Chain (
 -- Create the Hotel table
 CREATE TABLE IF NOT EXISTS Hotel (
    Hotel_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
-   Name VARCHAR(255),
    Address VARCHAR(255),
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
