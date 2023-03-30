@@ -46,7 +46,8 @@ CREATE PROCEDURE Customer_Booking (
     IN Hotel_ID INT,
     IN First_Day DATE,
     IN Last_Day DATE,
-    IN Price DECIMAL(10,2)
+    IN Price DECIMAL(10,2),
+    OUT Customer_ID INT
 )
 BEGIN
 	INSERT INTO Customer (Full_name, Address, SIN, Registration_Date) 
