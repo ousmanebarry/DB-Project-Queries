@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Customer (
    Customer_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   SSN_SIN INT,
+   SIN INT,
    Registration_Date DATE
 );
 
@@ -72,13 +72,13 @@ CREATE TABLE IF NOT EXISTS Booking (
    Booking_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Specific_Date DATE,
    Customer_ID INT,
-   Room_Number INT,
+   Room_ID INT,
    Hotel_ID INT,
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Room_ID) REFERENCES Room(Room_ID),
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
@@ -87,13 +87,13 @@ CREATE TABLE IF NOT EXISTS Renting (
    Renting_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Specific_Date DATE,
    Customer_ID INT,
-   Room_Number INT,
+   Room_ID INT,
    Hotel_ID INT,
    First_Day DATE,
    Last_Day DATE,
    Price DECIMAL(10,2),
    FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Room_Number) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Room_ID) REFERENCES Room(Room_ID),
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
