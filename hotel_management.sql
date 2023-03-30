@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Hotel (
    Number_Of_Rooms INT,
    Contact_Email VARCHAR(255),
    Contact_Phone VARCHAR(255),
-   Category VARCHAR(255),
+   Category VARCHAR(255) CHECK (Category in ('budget', 'resort', 'luxury', 'motel')),
    Rating INT CHECK (Rating>=1 AND Rating<=5),
    Chain_Name VARCHAR(255),
    FOREIGN KEY (Chain_Name) REFERENCES Hotel_Chain(Name) ON UPDATE CASCADE ON DELETE CASCADE
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Employee (
    SIN INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   Position VARCHAR(255) CHECK (Position in ("Receptionist")),
+   Position VARCHAR(255) CHECK (Position in ("receptionist")),
    Hotel_ID INT,
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
