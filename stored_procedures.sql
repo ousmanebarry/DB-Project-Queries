@@ -1,7 +1,7 @@
 USE hotel_management;
 
 DELIMITER //
-CREATE PROCEDURE Employee_Login(IN Username VARCHAR(255), IN Password VARCHAR(255)) 
+CREATE PROCEDURE Employee_Login(IN Username VARCHAR(255)) 
 BEGIN
 	SELECT 
 		User.Username,
@@ -12,7 +12,7 @@ BEGIN
         Employee.Hotel_ID
     FROM User
     JOIN Employee ON User.SIN = Employee.SIN
-    WHERE User.Username = Username AND User.Password = Password
+    WHERE User.Username = Username
 ;END //
 
 -- Search for rooms
@@ -34,6 +34,17 @@ BEGIN
       AND (Hotel_Category IS NULL OR H.Category = Hotel_Category)
       AND (Number_Of_Rooms IS NULL OR H.Number_Of_Rooms >= Number_Of_Rooms)
       AND (Price IS NULL OR Room.Price <= Price);
+END //
+
+-- Search for single room
+CREATE PROCEDURE Search_Room(
+	IN Hotel_ID INT,
+    IN Room_ID INT
+)
+BEGIN
+	SELECT Room.*, H.Address, H.Number_Of_Rooms, H.Contact_Email, H.Contact_Phone, H.Category, H.Rating, H.Chain_Name FROM Room
+	INNER JOIN Hotel AS H ON Room.Hotel_ID = H.Hotel_ID
+	WHERE Room.Hotel_ID = Hotel_ID AND Room.Room_ID = Room_ID;
 END //
 
 -- Create a customer booking
