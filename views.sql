@@ -23,10 +23,15 @@ WHERE customer.Username;
 
 -- Create Available_Rooms view
 CREATE VIEW Available_Rooms_Area AS
-SELECT h.Address, COUNT(r.Room_ID) AS Num_Available_Rooms
+SELECT  TRIM(SUBSTRING_INDEX(h.Address, ' ', -2)) AS Area, COUNT(r.Room_ID) AS Num_Available_Rooms
 FROM Hotel h JOIN Room r ON h.Hotel_ID = r.Hotel_ID
-WHERE r.Available = 1
-GROUP BY h.Address;
+  LEFT JOIN (
+    SELECT Room_ID, MAX(CASE WHEN CURDATE() BETWEEN First_Day AND Last_Day THEN 1 ELSE 0 END) AS Is_Booked
+    FROM Booking 
+    GROUP BY Room_ID
+  ) b ON b.Room_ID = r.Room_ID AND b.Is_Booked = 1
+WHERE b.Room_ID IS NULL
+GROUP BY Area;
 
 -- Create Capacity_Of_Rooms_In_Hotel view
 CREATE VIEW Capacity_Of_Rooms_In_Hotel AS
