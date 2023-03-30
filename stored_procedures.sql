@@ -25,7 +25,7 @@ CREATE PROCEDURE Search_Rooms(
     IN Price DECIMAL (10,2)
 )
 BEGIN
-    SELECT Room.* FROM Room
+    SELECT Room.*, H.Address, H.Number_Of_Rooms, H.Contact_Email, H.Contact_Phone, H.Category, H.Rating, H.Chain_Name FROM Room
     INNER JOIN Hotel AS H ON Room.Hotel_ID = H.Hotel_ID
     WHERE 
       (Room_Capacity IS NULL OR Room.Capacity = Room_Capacity)
