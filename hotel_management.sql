@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Customer (
    Customer_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
    Full_name VARCHAR(255),
    Address VARCHAR(255),
-   SIN INT,
+   SIN INT AUTO_INCREMENT,
    Registration_Date DATE
 );
 
