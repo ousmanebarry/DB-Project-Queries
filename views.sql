@@ -24,8 +24,7 @@ WHERE customer.Username;
 -- Create Available_Rooms view
 CREATE VIEW Available_Rooms_Area AS
 SELECT h.Address, COUNT(r.Room_ID) AS Num_Available_Rooms
-FROM Hotel h
-JOIN Room r ON h.Hotel_ID = r.Hotel_ID
+FROM Hotel h JOIN Room r ON h.Hotel_ID = r.Hotel_ID
 WHERE r.Available = 1
 GROUP BY h.Address;
 
@@ -33,8 +32,7 @@ GROUP BY h.Address;
 CREATE VIEW Capacity_Of_Rooms_In_Hotel AS
 SELECT 
 	Hotel.Hotel_ID,
-    SUM(Room.Capacity) AS Total_Capacity
-FROM Hotel
-JOIN Room ON Hotel.Hotel_ID = Room.Hotel_ID
+    SUM(Room.Capacity) AS Total_Capacity_Of_Hotel_Rooms
+FROM Hotel JOIN Room ON Hotel.Hotel_ID = Room.Hotel_ID
 GROUP BY Hotel.Hotel_ID; 
     
