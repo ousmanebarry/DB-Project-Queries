@@ -51,11 +51,11 @@ JOIN Hotel h ON b.Hotel_ID = h.Hotel_ID;
 
 -- Create Renting view
 CREATE VIEW Renting_View AS
-SELECT c.Full_name, b.First_Day, b.Last_Day, h.Chain_Name, h.Category, b.Price, ro.Room_Number
-FROM Renting b 
-JOIN Customer c ON c.Customer_ID = b.Customer_ID
-JOIN Room ro ON b.Room_ID = ro.Room_ID
-JOIN Hotel h ON b.Hotel_ID = h.Hotel_ID;
+SELECT c.Full_name, r.First_Day, r.Last_Day, h.Chain_Name, h.Category, r.Price, ro.Room_Number
+FROM Renting r 
+JOIN Customer c ON c.Customer_ID = r.Customer_ID
+JOIN Room ro ON r.Room_ID = ro.Room_ID
+JOIN Hotel h ON r.Hotel_ID = h.Hotel_ID;
 
 -- Create Profile view
 CREATE VIEW Profile_View AS
