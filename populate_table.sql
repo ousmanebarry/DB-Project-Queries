@@ -57,7 +57,7 @@ INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Damage, Hotel_ID
 WITH RECURSIVE nums(n) AS (
   SELECT 1
   UNION ALL
-  SELECT n + 1 FROM nums WHERE n < 30
+  SELECT n + 1 FROM nums WHERE n < 5
 )
 SELECT 
     ROUND(RAND() * 1000 + 50, 2) AS Price,
@@ -78,6 +78,5 @@ SELECT
     IF(RAND() > 0.8, 'Some minor damage', '') AS Damage,
     Hotel_ID
 FROM Hotel
-CROSS JOIN nums
-ORDER BY Hotel_ID;
+CROSS JOIN nums;
 

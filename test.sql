@@ -2,12 +2,15 @@ INSERT INTO Employee (Full_name, Address, Position, Hotel_ID) VALUES('Test', 'Te
 
 select * from employee;
 
-INSERT INTO User VALUES('test', 'test', 100000000);
+INSERT INTO User VALUES('test', '$2b$10$9B4fnNwuQSG/DGsgxfAEA.tbKjI3hQuuzt/lk7yqiLAYP3Dg0yVoi', 100000000);
 
 select * from user;
 
 CALL Employee_Login('test', 'test');
 
+select TRIM(SUBSTRING_INDEX(Address, ' ', -2)) from hotel;
+
+select * from hotel_chain;
 
 -- insert into customer (Full_name, Address, SIN, Registration_Date) values ('test', 'test', 100000000, CURDATE());
 
