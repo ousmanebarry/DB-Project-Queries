@@ -97,20 +97,49 @@ CREATE TABLE IF NOT EXISTS Renting (
    FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
 
--- Create the Archive table
-CREATE TABLE IF NOT EXISTS Archive (
-   Archive_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
-   Hotel_ID INT,
-   Renting_ID INT,
-   Booking_ID INT,
+-- Create the Booking table
+CREATE TABLE IF NOT EXISTS Booking_Archive (
+   Booking_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
+   Specific_Date DATE,
    Customer_ID INT,
-   Date_Of_Payment DATE,
-   Room_Number INT,
-   Length_Of_Stay INT,
+   Room_ID INT,
+   Hotel_ID INT,
+   First_Day DATE,
+   Last_Day DATE,
    Price DECIMAL(10,2),
-   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID) ON UPDATE CASCADE ON DELETE CASCADE,
-   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Room_ID) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
 );
+
+-- Create the Renting_Archive table
+CREATE TABLE IF NOT EXISTS Renting_Archive (
+   Renting_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
+   Specific_Date DATE,
+   Customer_ID INT,
+   Room_ID INT,
+   Hotel_ID INT,
+   First_Day DATE,
+   Last_Day DATE,
+   Price DECIMAL(10,2),
+   FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY (Room_ID) REFERENCES Room(Room_ID),
+   FOREIGN KEY (Hotel_ID) REFERENCES Hotel(Hotel_ID)
+);
+-- Create the Archive table
+-- CREATE TABLE IF NOT EXISTS Archive (
+--   Archive_ID INT AUTO_INCREMENT UNIQUE PRIMARY KEY,
+--   Hotel_ID INT,
+--   Renting_ID INT,
+--   Booking_ID INT,
+--   Customer_ID INT,
+--   Date_Of_Payment DATE,
+--   Room_Number INT,
+--   Length_Of_Stay INT,
+--   Price DECIMAL(10,2),
+--   FOREIGN KEY (Renting_ID) REFERENCES Renting(Renting_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+--   FOREIGN KEY (Booking_ID) REFERENCES Booking(Booking_ID) ON UPDATE CASCADE ON DELETE CASCADE
+-- );
 
 -- Create the Payment table 
 CREATE TABLE IF NOT EXISTS Payment (
