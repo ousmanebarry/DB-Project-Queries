@@ -80,3 +80,8 @@ SELECT
 FROM Hotel
 CROSS JOIN nums;
 
+-- Create employee
+INSERT INTO Employee (Full_name, Address, Position, Hotel_ID)
+VALUES ("John Doe", "75 Laurier Avenue", "Receptionist", 1);
+INSERT INTO User (Username, Password, SIN)
+VALUES ("admin", "admin",100000000);

@@ -1,26 +1,3 @@
--- Create employee view
-CREATE VIEW Employee_View AS
-SELECT 
-	SIN,
-	Full_name,
-	Address,
-	Position,
-	BIN_TO_UUID(Work_At) as Work_At,
-	Username
-FROM employee
-WHERE Username;
-
--- Create customer view
-CREATE VIEW Customer_View AS
-SELECT 
-	BIN_TO_UUID(Customer_ID) as Customer_ID,
-	Full_name,
-	Address,
-	Registration_Date,
-	Username
-FROM customer
-WHERE customer.Username;
-
 -- Create Available_Rooms view
 CREATE VIEW Available_Rooms_Area_View AS
 SELECT  TRIM(SUBSTRING_INDEX(h.Address, ' ', -2)) AS Area, COUNT(r.Room_ID) AS Num_Available_Rooms
@@ -43,7 +20,7 @@ GROUP BY Hotel.Hotel_ID;
 
 -- Create Booking view
 CREATE VIEW Booking_View AS
-SELECT c.Full_name, b.First_Day, b.Last_Day, h.Chain_Name, h.Category, b.Price, ro.Room_Number
+SELECT c.Full_name, c.Address, c.SIN, b.First_Day, b.Last_Day, h.Chain_Name, h.Category, b.Price, ro.Room_Number
 FROM Booking b 
 JOIN Customer c ON c.Customer_ID = b.Customer_ID
 JOIN Room ro ON b.Room_ID = ro.Room_ID
@@ -51,7 +28,7 @@ JOIN Hotel h ON b.Hotel_ID = h.Hotel_ID;
 
 -- Create Renting view
 CREATE VIEW Renting_View AS
-SELECT c.Full_name, r.First_Day, r.Last_Day, h.Chain_Name, h.Category, r.Price, ro.Room_Number
+SELECT c.Full_name, c.Address, c.SIN, r.First_Day, r.Last_Day, h.Chain_Name, h.Category, r.Price, ro.Room_Number
 FROM Renting r 
 JOIN Customer c ON c.Customer_ID = r.Customer_ID
 JOIN Room ro ON r.Room_ID = ro.Room_ID
@@ -65,4 +42,4 @@ SELECT
   e.Address,
   e.Position,
   h.Chain_Name
-FROM Employee e JOIN Hotel h ON e.Hotel_ID = h.Hotel_ID;     
+FROM Employee e JOIN Hotel h ON e.Hotel_ID = h.Hotel_ID;    
