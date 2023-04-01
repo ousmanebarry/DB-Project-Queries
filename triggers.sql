@@ -38,6 +38,8 @@ BEFORE DELETE ON Booking FOR EACH ROW
 BEGIN
 	INSERT INTO Booking_Archive (Booking_ID, Specific_Date, Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price)
 	VALUES (OLD.Booking_ID, OLD.Specific_Date, OLD.Customer_ID, OLD.Room_ID, OLD.Hotel_ID, OLD.First_Day, OLD.Last_Day, OLD.Price);
+    INSERT INTO Renting (Specific_Date, Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price)
+	VALUES (OLD.Specific_Date, OLD.Customer_ID, OLD.Room_ID, OLD.Hotel_ID, OLD.First_Day, OLD.Last_Day, OLD.Price);
 END;
 
 -- Inserts data from renting into renting archive before renting is deleted
