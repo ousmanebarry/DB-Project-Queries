@@ -59,8 +59,6 @@ END //
 
 -- Create a customer renting
 CREATE PROCEDURE Customer_Renting (
-    IN Renting_ID INT,
-    IN Specific_Date DATE,
     IN Customer_ID INT,
     IN Room_ID INT,
     IN Hotel_ID INT,
@@ -69,8 +67,8 @@ CREATE PROCEDURE Customer_Renting (
     IN Price DECIMAL(10,2)
 )
 BEGIN
-	INSERT INTO Renting (Renting_ID, Specific_Date, Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price)
-    VALUES (Renting_ID, Specific_Date,Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price);
+	INSERT INTO Renting (Specific_Date, Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price)
+    VALUES (CURDATE(),Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price);
 END //
 DELIMITER ;
 
