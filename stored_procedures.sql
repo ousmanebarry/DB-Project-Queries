@@ -58,6 +58,52 @@ BEGIN
 END //
 
 -- Create a customer renting
+CREATE PROCEDURE Employee_Renting (
+    IN Customer_Name VARCHAR(255),
+    IN Customer_Address VARCHAR(255),
+    IN Customer_SIN INT,
+    IN Registration_Date DATE,
+    IN Room_ID INT,
+    IN Hotel_ID INT,
+    IN First_Day DATE,
+    IN Last_Day DATE,
+    IN Price DECIMAL(10,2),
+    OUT Customer_ID INT
+)
+BEGIN
+	INSERT INTO Customer (Full_name, Address, SIN, Registration_Date) 
+    VALUES (Customer_Name, Customer_Address, Customer_SIN, Registration_Date);
+    SET Customer_ID = LAST_INSERT_ID();
+	INSERT INTO Renting (Specific_Date, Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price)
+    VALUES (CURDATE(), Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price);
+END //
+
+-- Check Renting
+CREATE PROCEDURE Check_Renting (
+    IN Room_ID INT,
+    IN Hotel_ID INT,
+    IN First_Day DATE,
+    IN Last_Day DATE
+)
+BEGIN
+	SELECT * FROM Renting r 
+    WHERE r.Hotel_ID=Hotel_ID AND r.Room_ID=Room_ID AND ((First_Day > r.First_Day AND Last_Day > r.First_Day)  OR (First_Day < r.Last_Day AND Last_Day < r.Last_Day));
+    
+END //
+
+-- Check booking
+CREATE PROCEDURE Check_Booking (
+    IN Room_ID INT,
+    IN Hotel_ID INT,
+    IN First_Day DATE,
+    IN Last_Day DATE
+)
+BEGIN
+	SELECT * FROM Booking b 
+    WHERE b.Hotel_ID=Hotel_ID AND b.Room_ID=Room_ID AND ((First_Day > b.First_Day AND Last_Day > b.First_Day)  OR (First_Day < b.Last_Day AND Last_Day < b.Last_Day));
+END //
+
+-- Create a customer renting
 CREATE PROCEDURE Customer_Renting (
     IN Customer_ID INT,
     IN Room_ID INT,
@@ -71,6 +117,5 @@ BEGIN
     VALUES (CURDATE(),Customer_ID, Room_ID, Hotel_ID, First_Day, Last_Day, Price);
 END //
 DELIMITER ;
-
 
 
