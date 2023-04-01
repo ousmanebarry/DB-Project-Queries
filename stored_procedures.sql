@@ -87,7 +87,7 @@ CREATE PROCEDURE Check_Renting (
 )
 BEGIN
 	SELECT * FROM Renting r 
-    WHERE r.Hotel_ID=Hotel_ID AND r.Room_ID=Room_ID AND ((First_Day > r.First_Day AND Last_Day > r.First_Day)  OR (First_Day < r.Last_Day AND Last_Day < r.Last_Day));
+    WHERE r.Hotel_ID=Hotel_ID AND r.Room_ID=Room_ID AND First_Day <= r.First_Day AND Last_Day >= r.Last_Day OR First_Day >= r.First_Day AND Last_Day <= r.Last_Day;
     
 END //
 
@@ -100,7 +100,8 @@ CREATE PROCEDURE Check_Booking (
 )
 BEGIN
 	SELECT * FROM Booking b 
-    WHERE b.Hotel_ID=Hotel_ID AND b.Room_ID=Room_ID AND ((First_Day > b.First_Day AND Last_Day > b.First_Day)  OR (First_Day < b.Last_Day AND Last_Day < b.Last_Day));
+    WHERE b.Hotel_ID=Hotel_ID AND b.Room_ID=Room_ID AND First_Day <= b.First_Day AND Last_Day >= b.Last_Day OR First_Day >= b.First_Day AND Last_Day <= b.Last_Day;
+    -- ((First_Day > b.First_Day AND Last_Day > b.First_Day)  OR (First_Day < b.Last_Day AND Last_Day < b.Last_Day))
 END //
 
 -- Create a customer renting
