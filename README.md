@@ -1,2 +1,2 @@
 # DB-Project-Queries
-This is the SQL portion of the e-hotel application
+This repository contains all of the SQL database code for the e-hotel application
